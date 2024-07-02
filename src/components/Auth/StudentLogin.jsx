@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/authContext.jsx';
-import { Link ,Navigate} from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 
 function StudentLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login, logout } = useAuth();
-  const navigateTo = Navigate();
+  const navigateTo = useNavigate();
 
   const loginHandler = async (e) => {
     e.preventDefault();
