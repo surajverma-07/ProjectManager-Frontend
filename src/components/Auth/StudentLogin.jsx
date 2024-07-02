@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/authContext.jsx';
-import { Link } from 'react-router-dom';
+import { Link ,Navigate} from 'react-router-dom';
 
 function StudentLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login, logout } = useAuth();
+  const navigateTo = Navigate();
 
   const loginHandler = async (e) => {
     e.preventDefault();
@@ -20,6 +21,7 @@ function StudentLogin() {
       toast.success(response.data.message || 'Student Login successful');
       console.log("Studetn login successfully ");
       login(response.data.data);
+      navigateTo('/')
     } catch (error) {
       toast.error(error.response.data.message || 'Student Login failed');
       logout();
