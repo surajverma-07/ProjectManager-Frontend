@@ -21,7 +21,7 @@ function StudentLogin() {
       toast.success(response.data.message || 'Student Login successful');
       console.log("Studetn login successfully ");
       login(response.data.data);
-      navigateTo('/')
+      navigateTo("/");
     } catch (error) {
       toast.error(error.response.data.message || 'Student Login failed');
       logout();
