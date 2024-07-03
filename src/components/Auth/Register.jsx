@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/authContext.jsx';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -14,7 +14,8 @@ function Register() {
     group: '',
     branch: '',
   });
-
+  const navigateTo = useNavigate();
+  const [loading,setLoading] = useState(false);
   const { login, logout } = useAuth();
 
   const handleChange = (e) => {
@@ -27,6 +28,7 @@ function Register() {
   const registerHandler = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true)
       const response = await axios.post(
         'https://projectmanagerbackend-mern.onrender.com/api/v1/student/register',
         formData,
@@ -35,7 +37,11 @@ function Register() {
       toast.success(response.data.message || 'Student registration successful');
       console.log("Student registered successfully");
       login(response.data.data);
+      setLoading(false);
+      navigateTo('/student/login');
     } catch (error) {
+      setLoading(false)
+      console.log(error);
       toast.error(error.response.data.message || 'Student registration failed');
       logout();
     }
@@ -50,7 +56,7 @@ function Register() {
         <h2 className="text-center text-2xl text-[#66D9EF] font-bold mb-4">Create your account</h2>
         <p className="text-center text-gray-400 mb-4">
           Already have an account?{' '}
-          <Link to="/login" className="text-primary hover:underline">
+          <Link to="/student/login" className="text-primary hover:underline">
             Sign In
           </Link>
         </p>
@@ -157,7 +163,9 @@ className="w-full px-3 py-2 rounded-lg bg-gray-700 text-gray-200 border border-g
             type="submit"
             className="w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 rounded-lg transition duration-200"
           >
-            Sign Up
+            {!loading ? 
+              "Sign Up":"Registering User"
+            }
           </button>
         </form>
       </div>
