@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 function AddProject() {
   const [title, setTitle] = useState('');
@@ -10,7 +11,8 @@ function AddProject() {
   const [studentTwo, setStudentTwo] = useState('');
   const [studentThree, setStudentThree] = useState('');
   const [projectImage, setProjectImage] = useState(null);
-
+  const [loading,setLoading] = useState(false);
+  const navigateTo = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -23,6 +25,7 @@ function AddProject() {
     formData.append('projectImage', projectImage);
 
     try {
+      setLoading(true);
       const response = await axios.post('https://projectmanagerbackend-mern.onrender.com/api/v1/project/submit', formData, {
         withCredentials: true,
         headers: {
@@ -30,8 +33,11 @@ function AddProject() {
         },
       });
       toast.success('Project added successfully!');
+      setLoading(false);
+      navigateTo('/project/my')
       // Handle success response from backend
     } catch (error) {
+      setLoading(false)
       toast.error('Error adding project: ' + error.response.data.message);
       // Handle error response from backend
     }
@@ -42,8 +48,8 @@ function AddProject() {
   };
 
   return (
-    <div className="container mx-auto p-4 md:p-6 lg:p-8 bg-gray-900 text-white">
-      <h1 className="text-2xl font-bold text-center">Add Your Project</h1>
+    <div className="container mx-auto p-4 pb-20 pt-32 md:pt-6 lg:p-8 bg-gray-900 text-white">
+      <h1 className="text-2xl font-bold text-center mb-4">Add Your Project</h1>
       <form onSubmit={handleSubmit} className="bg-gray-800 shadow-md rounded-lg p-4 md:p-6 lg:p-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
           <div>
@@ -63,14 +69,19 @@ function AddProject() {
             <label htmlFor="domain" className="block text-gray-400 text-sm font-bold mb-2">
               Domain
             </label>
-            <input
-              type="text"
+            <select
               id="domain"
               value={domain}
               onChange={(e) => setDomain(e.target.value)}
               className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Enter project domain"
-            />
+            >
+              <option value="">Select domain</option>
+              <option value="Web Development">Web Development</option>
+              <option value="App Development">App Development</option>
+              <option value="Game Development">Game Development</option>
+              <option value="AI/ML">AI/ML</option>
+              <option value="Other">Other</option>
+            </select>
           </div>
           <div>
             <label htmlFor="description" className="block text-gray-400 text-sm font-bold mb-2">
@@ -140,7 +151,10 @@ function AddProject() {
             type="submit"
             className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
-            Add Project
+            {!loading ?
+          "Add Project":
+          "Adding Project..."
+          }
           </button>
         </div>
       </form>

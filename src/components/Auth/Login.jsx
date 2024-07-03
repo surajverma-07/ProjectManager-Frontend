@@ -2,16 +2,18 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useAuth } from '../context/authContext.jsx';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 
 function Login() {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const { adminLogin, logout } = useAuth();
-
+  const [loading,setLoading] = useState(false);
+ const navigateTo = useNavigate();
   const loginHandler = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true)
       const response = await axios.post(
         'https://projectmanagerbackend-mern.onrender.com/api/v1/admin/login',
         { id, password },
@@ -19,14 +21,17 @@ function Login() {
       );
       toast.success(response.data.message || 'Admin Login successful');
       adminLogin(response.data.data);
+      navigateTo('/');
+      setLoading(false)
     } catch (error) {
+      setLoading(false)
       toast.error(error.response.data.message || 'Login failed');
       logout();
     }
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-900 text-white">
+    <div className="flex items-center pt-72 pb-10 mx-2  md:pt-44 justify-center bg-gray-900 text-white">
       <div className="max-w-lg w-full mx-auto bg-gray-800 rounded-lg shadow-lg p-8 -mt-32">
         <div className="mb-4 flex justify-center">
           <img src="/spmlogo.png" alt="logo" className="w-24" />

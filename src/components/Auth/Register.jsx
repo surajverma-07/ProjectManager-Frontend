@@ -41,14 +41,14 @@ function Register() {
       navigateTo('/student/login');
     } catch (error) {
       setLoading(false)
-      console.log(error);
+      console.log("error in register : ",error);
       toast.error(error.response.data.message || 'Student registration failed');
       logout();
     }
   };
 
   return (
-    <div className=" pt-44 pb-20  bg-gray-900 text-white">
+    <div className="pt-60 sm:pt-44  pb-20 mx-2 bg-gray-900 text-white">
       <div className="max-w-lg w-full mx-auto bg-gray-800 rounded-lg shadow-lg p-8 -mt-32">
         <div className="mb-4 flex justify-center">
           <img src="/spmlogo.png" alt="logo" className="w-24" />

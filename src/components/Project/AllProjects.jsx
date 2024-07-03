@@ -26,7 +26,7 @@ function Projects() {
   }, []);
 
   return (
-    <div className="container mx-auto p-4 bg-[#030717] text-white">
+    <div className="container mx-auto px-8 md:px-4 pt-32 md:pt-6 bg-[#030717] text-white">
       <h1 className="text-3xl font-bold text-center mb-8 ">All Projects</h1>
       <div className="flex flex-wrap justify-center xl:gap-x-20 mb-8">
         {projects.map((project) => (

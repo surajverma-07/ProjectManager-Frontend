@@ -37,7 +37,7 @@ function MyProject() {
   }, [projectId]);
 
   return (
-    <div className="container mx-auto p-4 bg-[#030717] text-white">
+    <div className="container mx-auto p-4 pt-32 md:pt-4 bg-[#030717] text-white">
       <h1 className="text-3xl font-bold text-center mb-8">Project</h1>
       <div className="flex flex-wrap justify-center xl:gap-x-20 mb-8">
         {project ? (
@@ -50,7 +50,7 @@ function MyProject() {
         ) : (
           <div className="bg-[#212931] rounded-lg shadow-md p-6 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4">
             <h2 className="text-2xl font-bold mb-4">No projects available</h2>
-            <button className="bg-[#FE3562] hover:bg-[#FE3562]/90 text-white font-bold py-2 px-4 rounded-full">Add Project</button>
+            <button className="bg-[#FE3562] hover:bg-[#FE3562]/90 text-white font-bold py-2 px-4 rounded-full"><Link to={'/project/submit'}>Add Project</Link></button>
           </div>
         )}
         {projectId && (

@@ -28,7 +28,6 @@ function App() {
   const { isAuthorized, userData, login, logout, adminLogin } = useAuth();
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
       try {
         const response = await axios.get(
           isAuthorized
@@ -53,7 +52,6 @@ function App() {
           console.log("Error while fetching user Data");
         }
       }
-      setLoading(false);
     };
 
     if (isAuthorized || !userData) {

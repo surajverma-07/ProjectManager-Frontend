@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import { useAuth } from './context/authContext';
+import { useNavigate } from 'react-router-dom';
 function Dashboard() {
   const [data, setData] = useState(null);
-
+  const navigateTo = useNavigate();
+  const{logout} = useAuth();
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -22,7 +24,7 @@ function Dashboard() {
   }, []);
 
   return (
-    <div className="container mx-auto p-4 min-h-screen bg-gray-900 text-white">
+    <div className="container mx-auto p-4 pt-32 md:pt-10 bg-gray-900 text-white">
       <div className="flex flex-col md:flex-row gap-4 p-4 min-h-full">
         <div className="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col gap-6 w-full md:w-1/2 h-full">
           <h2 className="text-3xl font-bold text-[#66D9EF]">Name</h2>
@@ -58,9 +60,7 @@ function Dashboard() {
               <span className="text-gray-200 ml-2">{data?.branch}</span>
             </div>
           </div>
-          <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-6 rounded focus:outline-none focus:shadow-outline mt-auto">
-            Logout
-          </button>
+         
         </div>
         <div className="bg-gray-800 p-6 rounded-lg shadow-lg flex flex-col gap-6 w-full md:w-1/2 h-full">
           <h2 className="text-3xl font-bold text-[#66D9EF]">
@@ -74,7 +74,7 @@ function Dashboard() {
               <h3 className="text-xl font-medium text-gray-200">
                 {title}
               </h3>
-              <span className="text-gray-400">Marks: {data?.marks?.[index]}</span>
+              <span className="text-gray-400">Marks: {(data?.marks?.[index])}</span>
             </div>
           ))}
         </div>

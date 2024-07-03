@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
-
+import { useNavigate } from 'react-router-dom';
 function SubmitFiles() {
+  const [loading,setLoading] = useState(false)
   const [projectId, setProjectId] = useState('');
   const [formData, setFormData] = useState({
     title: '',
     group: '',
     file: null,
   });
+  const navigateTo = useNavigate();
 
   useEffect(() => {
     axios.get('https://projectmanagerbackend-mern.onrender.com/api/v1/project/my', { withCredentials: true })
@@ -37,6 +39,7 @@ function SubmitFiles() {
     data.append('fileUrl', formData.file);
 
     try {
+      setLoading(true)
       await axios.post(`https://projectmanagerbackend-mern.onrender.com/api/v1/submission/submit/${projectId}`, data, {
         withCredentials:true,
         headers: {
@@ -51,14 +54,17 @@ function SubmitFiles() {
         file: null,
       });
       toast.success('File submitted successfully!');
+      setLoading(false)
+      navigateTo('/project/my');
     } catch (error) {
+      setLoading(false)
       console.error('Error submitting file:', error);
       toast.error('Error submitting file. Please try again later.');
     }
   };
 
   return (
-    <div className="container mx-auto p-4 h-screen bg-gray-900 text-white">
+    <div className="container mx-auto p-4 pt-32 md:pt-4 bg-gray-900 text-white">
       <h1 className="text-3xl text-[#66D9EF] font-bold text-center mb-8">File Submission</h1>
       <div className="flex flex-wrap justify-center items-center xl:gap-x-20 mb-8">
         <div className="bg-gray-800 rounded-lg shadow-md p-6 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4">
@@ -104,8 +110,10 @@ function SubmitFiles() {
             <button
               type="submit"
               className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Submit
+            >{!loading?
+              "Submit":"submitting..."
+              
+            }
             </button>
           </form>
         </div>

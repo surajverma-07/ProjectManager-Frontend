@@ -82,7 +82,7 @@ const ProjectDetails = () => {
   }
 
   return (
-    <div className="container h-fit mx-auto p-4 mb-10 bg-[#030717] text-white">
+    <div className="container pt-32 md:pt-6 mx-auto p-4 mb-10 bg-[#030717] text-white">
       <h1 className="text-3xl font-bold text-center text-[#FE3562] mb-4">
         {project.title}
       </h1>
@@ -109,16 +109,20 @@ const ProjectDetails = () => {
             <p className="text-[#C7C5B8] text-sm">Name: {project.submittedBy.name}</p>
             <p className="text-[#C7C5B8] text-sm">Roll No.: {project.submittedBy.rollnum}</p>
           </div>
+          {project.studentTwo &&
           <div className="bg-[#212931] p-4 rounded-lg mb-4">
             <h2 className="text-xl font-bold text-[#66D9EF] mb-2">Student 2</h2>
             <p className="text-[#C7C5B8] text-sm">Name: {project.studentTwo.name}</p>
             <p className="text-[#C7C5B8] text-sm">Roll No.: {project.studentTwo.rollnum}</p>
           </div>
+          }
+          {project.studentThree && 
           <div className="bg-[#212931] p-4 rounded-lg mb-4">
             <h2 className="text-xl font-bold text-[#66D9EF] mb-2">Student 3</h2>
             <p className="text-[#C7C5B8] text-sm">Name: {project.studentThree.name}</p>
             <p className="text-[#C7C5B8] text-sm">Roll No.: {project.studentThree.rollnum}</p>
           </div>
+          }
           <div className="bg-[#212931] p-4 rounded-lg mb-4">
             <h2 className="text-xl font-bold text-[#66D9EF] mb-2">Submitted On</h2>
             <p className="text-[#C7C5B8] text-sm">{project.submittedOn}</p>
@@ -127,7 +131,8 @@ const ProjectDetails = () => {
         <div className="flex-1">
           <div className="bg-[#212931] p-4 rounded-lg">
             <h2 className="text-xl font-bold text-[#66D9EF] text-center mb-4">Files</h2>
-            {files.map((file, index) => (
+           {files ? <>
+           {files.map((file, index) => (
               <div key={file._id} className="bg-[#212931] p-4 rounded-lg mb-2">
                 <h3 className="text-lg font-bold text-[#66D9EF] mb-1">{file.title}</h3>
                 <div className="flex justify-between items-center">
@@ -167,6 +172,8 @@ const ProjectDetails = () => {
                 </div>
               </div>
             ))}
+             </>:
+             <div>Files Not Available</div>}
           </div>
         </div>
       </div>

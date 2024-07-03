@@ -8,28 +8,33 @@ function StudentLogin() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { login, logout } = useAuth();
+  const [loading,setLoading] = useState(false);
+
   const navigateTo = useNavigate();
 
   const loginHandler = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const response = await axios.post(
         'https://projectmanagerbackend-mern.onrender.com/api/v1/student/login',
         { email, password },
         { withCredentials: true }
       );
-      toast.success(response.data.message || 'Student Login successful');
       console.log("Studetn login successfully ");
       login(response.data.data);
+      toast.success(response.data.message || 'Student Login successful');
       navigateTo("/");
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       toast.error(error.response.data.message || 'Student Login failed');
       logout();
     }
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-900 text-white">
+    <div className="flex items-center pt-72 pb-10 mx-2  md:pt-44 justify-center bg-gray-900 text-white">
       <div className="max-w-lg w-full mx-auto bg-gray-800 rounded-lg shadow-lg p-8 -mt-32">
         <div className="mb-4 flex justify-center">
           <img src="/spmlogo.png" alt="logo" className="w-24" />
@@ -73,8 +78,9 @@ function StudentLogin() {
           <button
             type="submit"
             className="w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 rounded-lg transition duration-200"
-          >
-            Sign In
+          >{!loading ?
+            "Sign In":"Signing in..."
+          }
           </button>
         </form>
       </div>

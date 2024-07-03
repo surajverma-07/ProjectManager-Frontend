@@ -19,9 +19,9 @@ function Notice() {
   }, []);
 
   return (
-    <div className="container mx-auto p-4 h-screen  bg-gray-900 text-white">
+    <div className="container mx-auto px-4 md:pt-4 pt-32 pb-4  bg-gray-900 text-white">
       <h1 className="text-3xl font-bold text-center mb-8">Notice</h1>
-      <div className="flex flex-wrap justify-center items-center xl:gap-x-20 mb-8">
+      <div className="flex flex-wrap justify-center items-center gap-y-4 xl:gap-x-20 mb-8">
         {notices ? 
         notices.map(notice => (
           <div key={notice._id} className="bg-gray-800 rounded-lg shadow-md p-6 w-full md:w-1/2 lg:w-1/3 xl:w-1/4 mb-4">
