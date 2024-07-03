@@ -7,7 +7,7 @@ function Home() {
   return (
     <Layout>
 
-    <div className="flex flex-wrap justify-center min-h-screen bg-gray-900 text-gray-100">
+    <div className="flex flex-wrap justify-center gap-y-4 md:gap-y-0 min-h-screen bg-gray-900 text-gray-100">
       <div className="w-full md:w-1/2 xl:w-1/3 text-center mt-32">
         <h1 className="text-5xl font-bold mb-4 text-[#66D9EF]">Student Project Manager</h1>
         <p className="mb-8">Manage projects in an easier way, track student projects</p>
@@ -19,7 +19,7 @@ function Home() {
         )
       }
       </div>
-      <div className="mt-10">
+      <div className="md:mt-10">
         <img src="/homepic.jpg" alt="placeholder image" className="w-60 h-60 md:w-96 md:h-96 rounded" />
       </div>
     </div>
