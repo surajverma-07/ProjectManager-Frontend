@@ -19,8 +19,8 @@ function Home() {
         )
       }
       </div>
-      <div className="w-1/3 mt-10">
-        <img src="/homepic.jpg" alt="placeholder image" className="w-60 h-60 md:w-full md:h-96 rounded" />
+      <div className="mt-10">
+        <img src="/homepic.jpg" alt="placeholder image" className="w-60 h-60 md:w-96 md:h-96 rounded" />
       </div>
     </div>
       </Layout>
