@@ -26,8 +26,6 @@ import StudentLogin from './components/Auth/StudentLogin.jsx';
 
 function App() {
   const { isAuthorized, userData, login, logout, adminLogin } = useAuth();
-  const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -41,17 +39,18 @@ function App() {
 
         if (isAuthorized) {
           login(response.data.student);
-          toast.success('Student data fetched successfully');
+          console.log('Student data fetched successfully');
         } else {
           adminLogin(response.data.admin);
-          toast.success('Admin data fetched successfully');
+          console.log('Admin data fetched successfully');
         }
       } catch (error) {
         if (error.response && error.response.status === 401) {
-          toast.error('Unauthorized');
+          console.log('Unauthorized');
           logout();
         } else {
-          toast.error(error.response.data.message || 'Failed to fetch user data');
+          // toast.error(error.response.data.message || 'Failed to fetch user data');
+          console.log("Error while fetching user Data");
         }
       }
       setLoading(false);
@@ -61,8 +60,6 @@ function App() {
       fetchData();
     }
   }, [isAuthorized, login, logout, adminLogin, userData]);
-
-  // if (loading) return <div>Loading...</div>;
 
   return (
     <BrowserRouter>

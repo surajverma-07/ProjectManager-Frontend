@@ -1,10 +1,12 @@
 import React from 'react'
 import { useAuth } from './context/authContext'
 import { Link } from 'react-router-dom';
-
+import Layout from './Layout';
 function Home() {
   const { isAuthorized, isAdmin } = useAuth()
   return (
+    <Layout>
+
     <div className="flex flex-wrap justify-center min-h-screen bg-gray-900 text-gray-100">
       <div className="w-full md:w-1/2 xl:w-1/3 text-center mt-32">
         <h1 className="text-5xl font-bold mb-4 text-[#66D9EF]">Student Project Manager</h1>
@@ -15,12 +17,13 @@ function Home() {
           :
           <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"><Link to={'/project/submit'}>Add Your Project</Link></button>
         )
-        }
+      }
       </div>
       <div className="w-1/3 mt-10">
-        <img src="/homepic.jpg" alt="placeholder image" className="w-full h-96 rounded" />
+        <img src="/homepic.jpg" alt="placeholder image" className="w-60 h-60 md:w-full md:h-96 rounded" />
       </div>
     </div>
+      </Layout>
   );
 }
 
