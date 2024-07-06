@@ -2,10 +2,19 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
-
+import {useAuth} from '../context/authContext.jsx'
 function Projects() {
   const [projects, setProjects] = useState([]);
+  const {isAdmin} = useAuth();
 
+  const deleteProject = async(id)=>{
+    try {
+      axios.delete(`https://projectmanagerbackend-mern.onrender.com/api/v1/project/delete/${id}`,{withCredentials:true})
+      toast.success("Project Deleted Successfully")
+    } catch (error) {
+      toast.error(error.response.data.message);
+    }
+   }
   useEffect(() => {
     const fetchProjects = async () => {
       try {
@@ -24,6 +33,7 @@ function Projects() {
 
     fetchProjects();
   }, []);
+  
 
   return (
     <div className="container mx-auto px-8 md:px-4 pt-32 md:pt-6 bg-[#030717] text-white">
@@ -43,9 +53,17 @@ function Projects() {
               {project.title}
             </h2>
             <p className="text-[#C7C5B8]">{project.description}</p>
-            <button className="bg-[#FE3562] hover:bg-[#FE3562]/90 text-white font-bold py-2 px-4 rounded-full mt-4">
+            <div className='flex gap-x-4'>
+
+            <button className="bg-blue-500 hover:bg-blue-300 text-white font-bold py-2 px-4 rounded-full mt-4">
               <Link to={`/project/${project._id}`}>Details</Link>
             </button>
+            {isAdmin &&
+             <button onClick={()=>deleteProject(project._id)} className="bg-red-500 hover:bg-red-300 text-white font-bold py-2 px-4 rounded-full mt-4">
+                  Delete
+             </button>
+            }
+            </div>
           </div>
         ))}
       </div>
