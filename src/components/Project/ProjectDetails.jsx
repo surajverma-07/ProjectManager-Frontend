@@ -77,6 +77,11 @@ const ProjectDetails = () => {
     }
   };
 
+  function formatDate(apiDate) {
+    const [year, month, day] = apiDate.split('T')[0].split('-');
+    return `${day}-${month}-${year}`;
+  }
+  
   if (!project || !files) {
     return <div>Loading...</div>;
   }
@@ -108,12 +113,14 @@ const ProjectDetails = () => {
             <h2 className="text-xl font-bold text-[#66D9EF] mb-2">Submitted By</h2>
             <p className="text-[#C7C5B8] text-sm">Name: {project.submittedBy.name}</p>
             <p className="text-[#C7C5B8] text-sm">Roll No.: {project.submittedBy.rollnum}</p>
+            <p className="text-[#C7C5B8] text-sm">Semester: {project.submittedBy.semester}</p>
           </div>
           {project.studentTwo &&
           <div className="bg-[#212931] p-4 rounded-lg mb-4">
             <h2 className="text-xl font-bold text-[#66D9EF] mb-2">Student 2</h2>
             <p className="text-[#C7C5B8] text-sm">Name: {project.studentTwo.name}</p>
-            <p className="text-[#C7C5B8] text-sm">Roll No.: {project.studentTwo.rollnum}</p>
+            <p className="text-[#C7C5B8] text-sm">Roll No: {project.studentTwo.rollnum}</p>
+            <p className="text-[#C7C5B8] text-sm">Semester: {project.studentTwo.semester}</p>
           </div>
           }
           {project.studentThree && 
@@ -121,11 +128,12 @@ const ProjectDetails = () => {
             <h2 className="text-xl font-bold text-[#66D9EF] mb-2">Student 3</h2>
             <p className="text-[#C7C5B8] text-sm">Name: {project.studentThree.name}</p>
             <p className="text-[#C7C5B8] text-sm">Roll No.: {project.studentThree.rollnum}</p>
+            <p className="text-[#C7C5B8] text-sm">Semester: {project.studentThree.semester}</p>
           </div>
           }
           <div className="bg-[#212931] p-4 rounded-lg mb-4">
             <h2 className="text-xl font-bold text-[#66D9EF] mb-2">Submitted On</h2>
-            <p className="text-[#C7C5B8] text-sm">{project.submittedOn}</p>
+            <p className="text-[#C7C5B8] text-sm">{formatDate(project.submittedOn)}</p>
           </div>
         </div>
         <div className="flex-1">
@@ -144,7 +152,7 @@ const ProjectDetails = () => {
                     Download
                   </a>
                   {editingMarks === file._id ? (
-                    <div className="flex items-center">
+                    <div className="flex items-center flex-wrap">
                       <input
                         type="number"
                         value={newMarks}

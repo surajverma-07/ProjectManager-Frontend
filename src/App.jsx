@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import toast,{Toaster} from 'react-hot-toast';
+import {Toaster} from 'react-hot-toast';
 import {
   Header,
   Footer,
@@ -23,6 +23,7 @@ import {
 } from './components/index.js';
 import { useAuth } from './components/context/authContext.jsx';
 import StudentLogin from './components/Auth/StudentLogin.jsx';
+import IssueDoc from './components/Document/IssueDoc.jsx';
 
 function App() {
   const { isAuthorized, userData, login, logout, adminLogin } = useAuth();
@@ -79,6 +80,8 @@ function App() {
             <Route path="/files/submit" element={<SubmitFiles />} />
             <Route path="/files/:projectId" element={<MyFiles />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path='/document/issue' element={<IssueDoc/>} />
+            <Route path='/document/:id' element={<IssueDoc/>} />
           </>
         ) : (
           <Route path="*" element={<Navigate to="/login" />} />

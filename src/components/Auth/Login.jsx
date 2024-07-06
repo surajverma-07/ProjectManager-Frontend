@@ -75,8 +75,10 @@ function Login() {
           <button
             type="submit"
             className="w-full bg-red-500 hover:bg-red-700 text-white font-bold py-2 rounded-lg transition duration-200"
-          >
-            Sign In
+          >{!loading?
+            
+           "Sign In":"signing in..."
+          }
           </button>
         </form>
       </div>
