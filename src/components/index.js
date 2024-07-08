@@ -7,7 +7,6 @@ import SubmitFiles from "./Files/SubmitFiles";
 import NotFound from "./NotFound/NotFound";
 import IssueNotice from "./Notice/IssueNotice";
 import Notice from "./Notice/Notice";
-import NoticeDetails from "./Notice/NoticeDetails";
 import AddProject from "./Project/AddProject";
 import AllProjects from "./Project/AllProjects";
 import MyProject from "./Project/MyProject";
@@ -32,5 +31,4 @@ export {
     SubmitFiles,
     NotFound,
     Notice,
-    NoticeDetails,
 }

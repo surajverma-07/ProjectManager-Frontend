@@ -14,6 +14,7 @@ function Register() {
     group: '',
     branch: '',
   });
+  const [error,setError] = useState(false)
   const navigateTo = useNavigate();
   const [loading,setLoading] = useState(false);
   const { login, logout } = useAuth();
@@ -38,9 +39,11 @@ function Register() {
       console.log("Student registered successfully");
       login(response.data.data);
       setLoading(false);
+      setError(false)
       navigateTo('/student/login');
     } catch (error) {
       setLoading(false)
+      setError(true)
       console.log("error in register : ",error);
       toast.error(error.response.data.message || 'Student registration failed');
       logout();
@@ -70,6 +73,7 @@ function Register() {
               id="name"
               name="name"
               value={formData.name}
+              placeholder='Your Full Name'
               onChange={handleChange}
               className="w-full px-3 py-2 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:border-primary"
               required
@@ -83,6 +87,7 @@ function Register() {
               type="email"
               id="email"
               name="email"
+              placeholder='Your Valid Email Id'
               value={formData.email}
               onChange={handleChange}
               className="w-full px-3 py-2 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:border-primary"
@@ -97,6 +102,7 @@ function Register() {
               type="password"
               id="password"
               name="password"
+              placeholder='Password'
               value={formData.password}
               onChange={handleChange}
               className="w-full px-3 py-2 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:border-primary"
@@ -111,6 +117,7 @@ function Register() {
               type="number"
               id="semester"
               name="semester"
+              placeholder='Current Semester'
               value={formData.semester}
               onChange={handleChange}
               className="w-full px-3 py-2 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:border-primary"
@@ -119,12 +126,14 @@ function Register() {
           </div>
           <div>
             <label htmlFor="rollnum" className="block text-gray-400 mb-1">
-              Roll Number
+              Roll Number {error &&
+              <p className='inline ml-4 text-sm text-red-700'>* Enter Currect University Roll Number</p>}
             </label>
             <input
               type="number"
               id="rollnum"
               name="rollnum"
+              placeholder='University Roll Number (12digit)'
               value={formData.rollnum}
               onChange={handleChange}
               className="w-full px-3 py-2 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:border-primary"
@@ -139,6 +148,7 @@ function Register() {
               type="text"
               id="group"
               name="group"
+              placeholder='Group No. (example : 4A12)'
               value={formData.group}
               onChange={handleChange}
 className="w-full px-3 py-2 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:border-primary"
@@ -153,6 +163,7 @@ className="w-full px-3 py-2 rounded-lg bg-gray-700 text-gray-200 border border-g
               type="text"
               id="branch"
               name="branch"
+              placeholder='Example : CSE'
               value={formData.branch}
               onChange={handleChange}
               className="w-full px-3 py-2 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:border-primary"

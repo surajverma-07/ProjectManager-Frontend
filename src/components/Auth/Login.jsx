@@ -55,6 +55,7 @@ function Login() {
               value={id}
               onChange={(e) => setId(e.target.value)}
               className="w-full px-3 py-2 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:border-primary"
+              placeholder='admin id'
               required
             />
           </div>
@@ -70,6 +71,7 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-3 py-2 rounded-lg bg-gray-700 text-gray-200 border border-gray-600 focus:outline-none focus:border-primary"
               required
+              placeholder='password'
             />
           </div>
           <button

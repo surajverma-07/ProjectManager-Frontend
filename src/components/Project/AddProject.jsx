@@ -12,6 +12,7 @@ function AddProject() {
   const [studentThree, setStudentThree] = useState('');
   const [projectImage, setProjectImage] = useState(null);
   const [loading,setLoading] = useState(false);
+  const [error,setError] = useState(false)
   const navigateTo = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,8 +36,10 @@ function AddProject() {
       toast.success('Project added successfully!');
       setLoading(false);
       navigateTo('/project/my')
+      setError(false)
       // Handle success response from backend
     } catch (error) {
+      setError(true)
       setLoading(false)
       toast.error('Error adding project: ' + error.response.data.message);
       // Handle error response from backend
@@ -44,7 +47,13 @@ function AddProject() {
   };
 
   const handleImageChange = (e) => {
-    setProjectImage(e.target.files[0]);
+    const file = e.target.files[0];
+    const validImageTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+    if (file && !validImageTypes.includes(file.type)) {
+      toast.error('Invalid file type. Only .png, .jpeg, and .jpg are allowed.');
+      return;
+    }
+    setProjectImage(file);
   };
 
   return (
@@ -97,7 +106,7 @@ function AddProject() {
           </div>
           <div>
             <label htmlFor="group" className="block text-gray-400 text-sm font-bold mb-2">
-              Group
+              Group {error && <p className='inline ml-2 text-sm text-red-400'>* Enter Correct Group Number</p>}
             </label>
             <input
               type="text"
@@ -110,37 +119,38 @@ function AddProject() {
           </div>
           <div>
             <label htmlFor="studentTwo" className="block text-gray-400 text-sm font-bold mb-2">
-              Student Two
+              Student Two {error && <p className='inline ml-2 text-sm text-red-400'>* Enter Correct University Roll Number</p>}
             </label>
             <input
-              type="text"
+              type='number'
               id="studentTwo"
               value={studentTwo}
               onChange={(e) => setStudentTwo(e.target.value)}
               className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Enter student two name"
+              placeholder="Enter Student Two Roll Number"
             />
           </div>
           <div>
             <label htmlFor="studentThree" className="block text-gray-400 text-sm font-bold mb-2">
-              Student Three
+              Student Three  {error && <p className='inline ml-2 text-sm text-red-400'>* Enter Correct University Roll Number</p>}
             </label>
             <input
-              type="text"
+              type='number'
               id="studentThree"
               value={studentThree}
               onChange={(e) => setStudentThree(e.target.value)}
               className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              placeholder="Enter student three name"
+              placeholder="Enter Student Three Roll Number"
             />
           </div>
           <div>
             <label htmlFor="projectImage" className="block text-gray-400 text-sm font-bold mb-2">
-              Project Image
+              Project Image  {error && <p className='inline ml-2 text-sm text-red-400'>* Enter Image Only </p>}
             </label>
             <input
               type="file"
               id="projectImage"
+              accept='.png, .jpeg, .jpg'
               onChange={handleImageChange}
               className="w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             />

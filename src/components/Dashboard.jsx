@@ -84,7 +84,7 @@ function Dashboard() {
                       {field}:
                     </label>
                     <input
-                      type={field === 'email' ? 'email' : 'text'}
+                      type={field === 'email' ? 'email' : field === 'rollnum' || 'semester' ? 'number': 'text'}
                       id={field}
                       name={field}
                       value={formData[field]}

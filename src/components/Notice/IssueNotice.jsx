@@ -58,6 +58,7 @@ function IssueNotice() {
                 type="text"
                 id="title"
                 name="title"
+                placeholder='Eg. PPT Submission'
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -70,6 +71,7 @@ function IssueNotice() {
               <textarea
                 id="description"
                 name="description"
+                placeholder='Eg. PPT max size '
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}

@@ -19,7 +19,6 @@ import {
   SubmitFiles,
   NotFound,
   Notice,
-  NoticeDetails,
 } from './components/index.js';
 import { useAuth } from './components/context/authContext.jsx';
 import StudentLogin from './components/Auth/StudentLogin.jsx';
@@ -72,7 +71,6 @@ function App() {
           <>
             <Route path="/notice/issue" element={<IssueNotice />} />
             <Route path="/notice/all" element={<Notice />} />
-            <Route path="/notice/:id" element={<NoticeDetails />} />
             <Route path="/project/submit" element={<AddProject />} />
             <Route path="/project/my" element={<MyProject />} />
             <Route path="/project/all" element={<AllProjects />} />
