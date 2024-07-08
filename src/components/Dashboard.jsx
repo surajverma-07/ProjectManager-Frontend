@@ -89,7 +89,7 @@ function Dashboard() {
                       name={field}
                       value={formData[field]}
                       onChange={handleInputChange}
-                      className="text-gray-200 p-2 bg-gray-700 rounded"
+                      className="text-gray-200 p-2 bg-gray-700 rounded "
                     />
                   </div>
                 ))}
@@ -104,11 +104,11 @@ function Dashboard() {
             ) : (
               <>
                 {['name', 'email', 'rollnum', 'group', 'semester', 'branch'].map((field) => (
-                  <div key={field} className="flex gap-2">
-                    <label htmlFor={field} className="text-gray-400 capitalize">
+                  <div key={field} className="flex gap-2 gap-y-4">
+                    <label htmlFor={field} className="text-gray-400 capitalize text-lg md:text-2xl">
                       {field.replace('rollnum', 'roll no').replace('group', 'group no')}:
                     </label>
-                    <span className="text-gray-200">{data?.[field]}</span>
+                    <span className="text-gray-200 text-lg md:text-2xl ">{data?.[field]}</span>
                   </div>
                 ))}
                 <button
