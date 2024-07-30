@@ -1,6 +1,7 @@
+//import statements 
 import React, { useState } from 'react';
-import axios from 'axios';
-import toast from 'react-hot-toast';
+import axios from 'axios';//used to fetch backend data 
+import toast from 'react-hot-toast';//notifications 
 import { useAuth } from '../context/authContext.jsx';
 import { Link ,useNavigate} from 'react-router-dom';
 

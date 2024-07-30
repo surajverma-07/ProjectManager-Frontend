@@ -1,3 +1,5 @@
+//Routes are declared in App.jsx
+//import statements
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
 import { useEffect, useState } from 'react';
@@ -25,6 +27,7 @@ import StudentLogin from './components/Auth/StudentLogin.jsx';
 import IssueDoc from './components/Document/IssueDoc.jsx';
 
 function App() {
+  //states from Context Api
   const { isAuthorized, userData, login, logout, adminLogin } = useAuth();
   useEffect(() => {
     const fetchData = async () => {
