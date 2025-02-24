@@ -29,9 +29,9 @@ function Dashboard() {
           semester: response.data.data.semester,
           branch: response.data.data.branch,
         });
-        console.log('User Dashboard Fetched : ', response.data);
+        // console.log('User Dashboard Fetched : ', response.data);
       } catch (error) {
-        console.log('Error while fetching user data for dashboard', error);
+        // console.log('Error while fetching user data for dashboard', error);
       }
     };
 
@@ -61,11 +61,11 @@ function Dashboard() {
       setData(response.data.data);
       setIsEditable(false);
       toast.success('User Details Updated Successfully');
-      console.log('User details updated: ', response.data);
+      // console.log('User details updated: ', response.data);
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.log('Error while updating user data', error);
+      // console.log('Error while updating user data', error);
       toast.error(error.response.data.message);
     }
   };

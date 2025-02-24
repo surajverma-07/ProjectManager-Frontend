@@ -41,14 +41,14 @@ function App() {
 
         if (isAuthorized) {
           login(response.data.student);
-          console.log('Student data fetched successfully');
+          // console.log('Student data fetched successfully');
         } else {
           adminLogin(response.data.admin);
-          console.log('Admin data fetched successfully');
+          // console.log('Admin data fetched successfully');
         }
       } catch (error) {
         if (error.response && error.response.status === 401) {
-          console.log('Unauthorized');
+          // console.log('Unauthorized');
           logout();
         } else {
           // toast.error(error.response.data.message || 'Failed to fetch user data');
